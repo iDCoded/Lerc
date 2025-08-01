@@ -1,8 +1,8 @@
 {
-    "name": "Lerc",
+    "name": "Lerc Voice Assistant",
     "short_name": "Lerc",
-    "description": "Offline AI Voice Assistant",
-    "start_url": ".",
+    "description": "Offline-capable voice assistant with local STT and TTS",
+    "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
