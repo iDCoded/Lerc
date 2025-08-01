@@ -16,8 +16,14 @@ export default function Home() {
 			new URL("../workers/whisperWorker.ts", import.meta.url)
 		);
 		workerRef.current.onmessage = (event) => {
-			setTranscript(event.data.text);
+			if (event.data.message === "ready") {
+				console.log("Worker Ready");
+			} else if (event.data.message === "result") {
+				setTranscript(event.data.text);
+			}
 		};
+
+		workerRef.current.postMessage({ type: "init" });
 
 		return () => {
 			workerRef.current?.terminate();
@@ -30,7 +36,9 @@ export default function Home() {
 		const response = await fetch(audioUrl);
 		const audioBlob = await response.blob();
 
-		workerRef.current.postMessage({ type: "transcribe", audioBlob });
+		const audioBuffer = await audioBlob.arrayBuffer();
+
+		workerRef.current.postMessage({ type: "transcribe", audioBuffer });
 	};
 
 	return (
