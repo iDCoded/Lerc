@@ -6,10 +6,10 @@ function convertTypedArray(src, type) {
     return new type(buffer);
 }
 
-var printTextarea = (function() {
+var printTextarea = (function () {
     var element = document.getElementById('output');
     if (element) element.value = ''; // clear browser cache
-    return function(text) {
+    return function (text) {
         if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
         console.log(text);
         if (element) {
@@ -61,11 +61,11 @@ async function fetchRemote(url, cbProgress, cbPrint) {
         receivedLength += value.length;
 
         if (contentLength) {
-            cbProgress(receivedLength/total);
+            cbProgress(receivedLength / total);
 
             var progressCur = Math.round((receivedLength / total) * 10);
             if (progressCur != progressLast) {
-                cbPrint('fetchRemote: fetching ' + 10*progressCur + '% ...');
+                cbPrint('fetchRemote: fetching ' + 10 * progressCur + '% ...');
                 progressLast = progressCur;
             }
         }
